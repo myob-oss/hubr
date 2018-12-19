@@ -1,3 +1,10 @@
+v0.5.1
+
+- first oss build, pre-oss release
+- update badge url
+- import (history wipe)
+
+
 v0.4.1
 
 post dede build; closing a bug morgan found and prepping for oss release.
