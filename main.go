@@ -82,8 +82,8 @@ type client struct {
 // The first result which is not missing is used for GitHub authentication.
 // If no result is found hubr will attempt to invoke a git credential helper.
 func NewClient() (*client, error) {
-	if _, ok := os.LookupEnv("HUBR_DEFAULT_ORG"); ok {
-		defaultOrg = os.Getenv("HUBR_DEFAULT_ORG")
+	if org, ok := os.LookupEnv("HUBR_DEFAULT_ORG"); ok {
+		defaultOrg = org
 	}
 
 	var token string
