@@ -1,6 +1,6 @@
 # hubr
 
-[![Build status](https://badge.buildkite.com/e98c3891d6cdb50cce4c2f30ff65fc1b13b04046e574f9fffe.svg?branch=master)](https://buildkite.com/myob/hubr)
+[![build status](https://badge.buildkite.com/2b4f124a3e79969bf2d7e4dd78ca21eec29ecfcec3e3b39da4.svg?branch=master&theme=00aa65,ce2554,2b74df,8241aa,fff,fff)](https://buildkite.com/myob/hubr)
 
 ## about
 
