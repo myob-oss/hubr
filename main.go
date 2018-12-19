@@ -49,7 +49,7 @@ const (
 
 var (
 	// the default org/owner if not supplied
-	defaultOrg = os.Getenv("HUBR_DEFAULT_ORG")
+	defaultOrg = ""
 
 	// default auth chain (key:value,key:value)
 	defaultChain = "env:GITHUB_API_TOKEN,env:TOKEN"
@@ -82,6 +82,10 @@ type client struct {
 // The first result which is not missing is used for GitHub authentication.
 // If no result is found hubr will attempt to invoke a git credential helper.
 func NewClient() (*client, error) {
+	if _, ok := os.LookupEnv("HUBR_DEFAULT_ORG"); ok {
+		defaultOrg = os.Getenv("HUBR_DEFAULT_ORG")
+	}
+
 	var token string
 	for _, p := range strings.Split(defaultChain, ",") {
 		kv := strings.Split(p, ":")
