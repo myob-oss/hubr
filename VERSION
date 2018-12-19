@@ -1,0 +1,65 @@
+v0.4.1
+
+post dede build; closing a bug morgan found and prepping for oss release.
+
+- adds guard for missing VERSION - closes #3
+- update readme
+- what was that doing there?
+- clean up build
+- add license; fix pipeline script
+- remove queue and account info from build pipeline
+- move cred helper code into main.go
+- remove ssm support; change defaultOrg to read env HUBR_DEFAULT_ORG
+- add support for git credential helpers
+- build tag ssm support; start work on a credential helper token source
+- rearchitect build process for opening
+- revise helps; fix a bug in the new ssm code
+- revise helps
+- remove kantan dependency; clean up auth chain implementation
+
+
+v0.4.0
+
+- add flag and capability to print the current version
+- add subcmd cat, works like get but prints to stdout
+- add flags for number of (up|down)load workers
+- fix a bug with asset globbing
+
+
+v0.3.6
+
+- fix overly strict regexes
+- fix get downloading incorrect assets
+- refactor upload and download logic
+
+
+v0.3.5
+
+- fix incorrect output of assets subcmd while globbing
+
+
+v0.3.4
+
+- add capability to glob for assets with subcmds assets, get, install
+- allow subcmds assets, get, install, resolve, tags to read args from stdin
+
+
+v0.3.3
+
+- fix uploader not checking for the right asset name
+
+
+v0.3.2
+
+- add subcmd now
+
+
+v0.3.1
+
+- fix help for push and release
+
+
+v0.3.0
+
+- bumped from MYOB-Technology/hubr@v0.2.1
+
