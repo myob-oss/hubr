@@ -2154,7 +2154,7 @@ func credHelper() string {
 	done := make(chan error)
 	go func() { done <- cmd.Wait() }()
 	select {
-	case <-time.After(5 * time.Second):
+	case <-time.After(10 * time.Second):
 		cmd.Process.Kill()
 		// i really don't like printing here, but i don't want to add err return
 		fmt.Fprintln(os.Stderr, "cred helper timeout: 5sec")
