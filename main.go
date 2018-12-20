@@ -2152,23 +2152,10 @@ func credHelper() string {
 	}
 
 	done := make(chan error)
-	go func() { done <- cmd.Wait() }()
-	select {
-	case <-time.After(10 * time.Second):
-		cmd.Process.Kill()
-		// i really don't like printing here, but i don't want to add err return
-		fmt.Fprintln(os.Stderr, "cred helper timeout: 5sec")
-		return ""
-	case err := <-done:
-		if err != nil {
-			// as above, it's not right printing this deep
-			fmt.Fprintf(os.Stderr, "error from cred helper: %v\n", err)
-			return ""
-		}
-	}
-
 	var t string
 	s := bufio.NewScanner(r)
+
+	go func() { done <- cmd.Wait() }()
 	go func() {
 		for s.Scan() {
 			p := strings.Split(s.Text(), "=")
@@ -2181,16 +2168,21 @@ func credHelper() string {
 			}
 		}
 	}()
+
 	select {
-	case <-time.After(1 * time.Second):
-		// and again, refer above
+	case <-time.After(5 * time.Second):
+		cmd.Process.Kill()
+		// i really don't like printing here, but i don't want to add err return
 		fmt.Fprintln(os.Stderr, "cred helper timeout: 5sec")
 		return ""
 	case err := <-done:
 		if err != nil {
+			// as above, it's not right printing this deep
+			fmt.Fprintf(os.Stderr, "error from cred helper: %v\n", err)
 			return ""
 		}
 	}
+
 	return t
 }
 
