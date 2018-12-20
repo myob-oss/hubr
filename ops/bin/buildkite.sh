@@ -19,4 +19,7 @@ steps:
       ecr#v1.1.4:
         login: true
         account_ids: [ "$ECR_ACCT" ]
+  - trigger: 'hubr-myob'
+    label: ':satellite_antenna: build private version'
+    async: true
 🐈
