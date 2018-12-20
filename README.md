@@ -62,7 +62,7 @@ The VERSION file is `hubr`'s mechanism for clutching releases on a rolling
 master. It has the benefit of making the current version available in code at
 build time. Quite simply, the first line of the VERSION file is the current
 version. The VERSION file would typically live at the root of your repository
-although alternate pathsmay be set using flags.
+although alternate paths may be set using flags.
 
 ```sh
 version=$(head -n 1 VERSION)
