@@ -62,6 +62,12 @@ var (
 	hubr = "unknown"
 )
 
+func init() {
+	if org, ok := os.LookupEnv("HUBR_DEFAULT_ORG"); ok {
+		defaultOrg = org
+	}
+}
+
 // asset is a GitHub release asset and a pointer to the release
 type asset struct {
 	github.ReleaseAsset
@@ -82,10 +88,6 @@ type client struct {
 // The first result which is not missing is used for GitHub authentication.
 // If no result is found hubr will attempt to invoke a git credential helper.
 func NewClient() (*client, error) {
-	if org, ok := os.LookupEnv("HUBR_DEFAULT_ORG"); ok {
-		defaultOrg = org
-	}
-
 	var token string
 	for _, p := range strings.Split(defaultChain, ",") {
 		kv := strings.Split(p, ":")
