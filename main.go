@@ -2390,7 +2390,7 @@ func ssmGet(p string) (string, error) {
 	rsp, err := ssm.New(cfg).GetParameterRequest(&ssm.GetParameterInput{
 		Name:           aws.String(p),
 		WithDecryption: aws.Bool(true),
-	}).Send()
+	}).Send(context.Background())
 	if err != nil {
 		if e, ok := err.(awserr.Error); ok {
 			switch e.Code() {
