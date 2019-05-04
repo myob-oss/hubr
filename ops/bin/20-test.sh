@@ -1,6 +1,7 @@
 #!/bin/bash
 
 die() { echo "test failed: $*"; exit 1; }
+org=MYOB-Technology
 
 echo "~~~ test"
 
@@ -11,7 +12,7 @@ cd "$(dirname "$(git rev-parse --absolute-git-dir)")" || die "cd to repo root"
 # TODO better tests
 unzip dist/hubr-linux.zip || die "unzip hubr"
 echo "hubr tags"
-./hubr tags -la hubr || die "tags"
+./hubr tags -la $org/hubr || die "tags"
 echo "hubr assets"
-./hubr assets -l hubr || die "assets"
+./hubr assets -l $org/hubr || die "assets"
 rm -f hubr
