@@ -88,6 +88,7 @@ type client struct {
 // The first result which is not missing is used for GitHub authentication.
 // If no result is found hubr will attempt to invoke a git credential helper.
 func NewClient() (*client, error) {
+	var err error
 	var token string
 	for _, p := range strings.Split(defaultChain, ",") {
 		kv := strings.Split(p, ":")
@@ -98,7 +99,7 @@ func NewClient() (*client, error) {
 		case "env":
 			token = os.Getenv(kv[1])
 		case "ssm":
-			token, _ = ssmGet(kv[1])
+			token, err = ssmGet(kv[1])
 		default:
 			return nil, fmt.Errorf("invalid auth chain value: %v", p)
 		}
@@ -110,6 +111,9 @@ func NewClient() (*client, error) {
 		token = credHelper()
 	}
 	if token == "" {
+		if err != nil {
+			return nil, fmt.Errorf("ssm error: %v", err)
+		}
 		return nil, fmt.Errorf("auth chain failed: " + defaultChain)
 	}
 	ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: token})
