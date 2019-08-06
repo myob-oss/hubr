@@ -112,7 +112,7 @@ func NewClient() (*client, error) {
 	}
 	if token == "" {
 		if err != nil {
-			return nil, fmt.Errorf("ssm error: %v", err)
+			return nil, fmt.Errorf("auth chain failed: %v", err)
 		}
 		return nil, fmt.Errorf("auth chain failed: " + defaultChain)
 	}
@@ -570,7 +570,7 @@ type ident struct {
 	org, repo, tag, asset, dst string
 }
 
-func parseId(s string) (ident, bool) {
+func parseID(s string) (ident, bool) {
 	ms := idRx.FindStringSubmatch(s)
 	if len(ms) != 6 {
 		return ident{}, false
@@ -1327,7 +1327,7 @@ func assets(args []string) error {
 
 	w := tabwriter.NewWriter(os.Stdout, 16, 8, 2, ' ', 0)
 	for _, arg := range args {
-		id, ok := parseId(arg)
+		id, ok := parseID(arg)
 		if !ok {
 			return errors.New("failed to parse " + arg + ", does not match " + helpOrgPart + "<repo>[@<tag>]")
 		}
@@ -1432,7 +1432,7 @@ func bump(args []string) error {
 		}
 		last = s
 	default:
-		id, ok := parseId(*latest)
+		id, ok := parseID(*latest)
 		if !ok {
 			log.Printf("%s does not match "+helpOrgPart+"<repo>", *latest)
 			f.Usage()
@@ -1530,7 +1530,7 @@ func cat(args []string) error {
 
 	d := newDowner(c, 1)
 	for _, arg := range args {
-		id, _ := parseId(arg)
+		id, _ := parseID(arg)
 		if id.asset == "" {
 			return errors.New("failed to parse " + arg + ", does not match " + helpOrgPart + "<repo>[@<tag>]:<asset>[:<dst>]")
 		}
@@ -1579,7 +1579,7 @@ func get(args []string) error {
 
 	d := newDowner(c, *wkr)
 	for _, arg := range args {
-		id, _ := parseId(arg)
+		id, _ := parseID(arg)
 		if id.asset == "" {
 			return errors.New("failed to parse " + arg + ", does not match " + helpOrgPart + "<repo>[@<tag>]:<asset>[:<dest>]")
 		}
@@ -1639,7 +1639,7 @@ func install(args []string) error {
 	ass := []asset{}
 	d := newDowner(c, *wkr)
 	for _, arg := range args {
-		id, _ := parseId(arg)
+		id, _ := parseID(arg)
 		if id.asset == "" {
 			return errors.New("failed to parse " + arg + ", does not match " + helpOrgPart + "<repo>[@<tag>]:<asset>[:<dest>]")
 		}
@@ -1726,7 +1726,7 @@ func push(args []string) error {
 		os.Exit(2)
 	}
 
-	id, ok := parseId(f.Arg(0))
+	id, ok := parseID(f.Arg(0))
 	if !ok || id.tag != defaultTag {
 		log.Printf("failed to parse %s, does not match "+helpOrgPart+"<repo>", f.Arg(0))
 		f.Usage()
@@ -1796,7 +1796,7 @@ func release(args []string) error {
 		os.Exit(2)
 	}
 
-	id, ok := parseId(f.Arg(0))
+	id, ok := parseID(f.Arg(0))
 	if !ok || id.tag == defaultTag || id.tag == "stable" || id.tag == "edge" {
 		log.Printf("failed to parse %s, does not match "+helpOrgPart+"<repo>@<tag>", f.Arg(0))
 		f.Usage()
@@ -1890,7 +1890,7 @@ func resolve(args []string) error {
 	}
 
 	for _, arg := range args {
-		id, ok := parseId(arg)
+		id, ok := parseID(arg)
 		if !ok {
 			return fmt.Errorf("failed to parse %s, does not match "+helpOrgPart+"<repo>[@<tag>]", f.Arg(0))
 		}
@@ -1956,7 +1956,7 @@ func tags(args []string) error {
 
 	w := tabwriter.NewWriter(os.Stdout, 12, 8, 2, ' ', 0)
 	for _, arg := range args {
-		id, ok := parseId(arg)
+		id, ok := parseID(arg)
 		if !ok {
 			return fmt.Errorf("failed to parse %s, does not match "+helpOrgPart+"<repo>", f.Arg(0))
 		}
