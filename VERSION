@@ -1,3 +1,10 @@
+v0.6.5
+
+- Merge branch 'master' of github.com:MYOB-Technology/hubr
+- bump aws sdk version
+- fix infinite loop bug caused by invalid pathing check on Windows OS
+
+
 v0.6.4
 
 - improve error output for ssm
