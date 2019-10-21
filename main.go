@@ -2296,7 +2296,7 @@ func locateGitDir(path string) (string, error) {
 		return "", err
 	}
 
-	if p == "/" {
+	if strings.HasSuffix(filepath.Clean(p), "/") || strings.HasSuffix(filepath.Clean(p), "\\") {
 		return "", errors.New("unable to locate .git directory")
 	}
 
