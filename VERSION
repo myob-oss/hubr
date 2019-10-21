@@ -1,3 +1,9 @@
+v0.6.6
+
+- fix .git not found bug
+- make check for root safer
+
+
 v0.6.5
 
 - Merge branch 'master' of github.com:MYOB-Technology/hubr
