@@ -15,4 +15,8 @@ echo "hubr tags"
 ./hubr tags -la $org/hubr || die "tags"
 echo "hubr assets"
 ./hubr assets -l $org/hubr || die "assets"
+echo "hubr get"
+./hubr get $org/hubr:hubr-linux.zip || die "get"
+echo "hubr bump"
+./hubr bump -w patch || die "bump"
 rm -f hubr
