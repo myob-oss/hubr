@@ -15,7 +15,7 @@ for semantic versioning and changelog generation.
 
 ## get hubr
 
-Over [here](https://github.com/MYOB-Technology/hubr/releases/latest)!
+Over [here](https://github.com/myob-oss/hubr/releases/latest)!
 
 
 ## authentication
@@ -262,13 +262,13 @@ hubr release <repo>@<tag>
 Get the tag for latest, stable or edge.
 ```sh
 hubr resolve hubr
-# output: MYOB-Technology/hubr@v0.1.2
+# output: myob-oss/hubr@v0.1.2
 ```
 
 Or the web url for the release.
 ```sh
 hubr resolve -w hubr
-# output: https://github.com/MYOB-Technology/hubr/releases/tag/v0.1.2
+# output: https://github.com/myob-oss/hubr/releases/tag/v0.1.2
 ```
 
 Read from stdin.
@@ -276,7 +276,7 @@ Read from stdin.
 echo hubr > manifest
 
 hubr resolve - < manifest
-# output: MYOB-Technology/hubr@v0.1.2
+# output: myob-oss/hubr@v0.1.2
 ```
 
 Version lock a manifest!
