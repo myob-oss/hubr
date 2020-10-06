@@ -15,10 +15,6 @@ steps:
       - ops/bin/40-release.sh
     agents:
       queue: $QUEUE
-    plugins:
-      ecr#v1.1.4:
-        login: true
-        account_ids: [ "$ECR_ACCT" ]
   - wait
   - trigger: 'hubr-myob'
     label: ':satellite_antenna: build private version'
