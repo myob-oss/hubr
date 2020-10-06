@@ -1,7 +1,6 @@
 #!/bin/bash
 
 [[ -n $QUEUE ]] || { echo "QUEUE is not set sad face emoji" >&2; exit 1; }
-[[ -n $ECR_ACCT ]] || { echo "ECR_ACCT is not set meh emoji" >&2; exit 1; }
 # CONTAINER is required by build-static.sh, may as well check here too
 [[ -n $CONTAINER ]] || { echo "CONTAINER is not set crying emoji" >&2; exit 1; }
 
