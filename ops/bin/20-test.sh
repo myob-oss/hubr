@@ -1,7 +1,7 @@
 #!/bin/bash
 
 die() { echo "test failed: $*"; exit 1; }
-org=MYOB-Technology
+org=myob-oss
 
 echo "~~~ test"
 
