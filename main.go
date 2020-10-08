@@ -1322,7 +1322,8 @@ func assets(args []string) error {
 
 	c, err := NewClient()
 	if err != nil {
-		return err
+		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
+		c = &client{Client: github.NewClient(nil)}
 	}
 
 	w := tabwriter.NewWriter(os.Stdout, 16, 8, 2, ' ', 0)
@@ -1440,7 +1441,8 @@ func bump(args []string) error {
 		}
 		c, err := NewClient()
 		if err != nil {
-			return err
+			fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
+			c = &client{Client: github.NewClient(nil)}
 		}
 		r, err := c.GetRelease(id)
 		if err != nil {
@@ -1525,7 +1527,8 @@ func cat(args []string) error {
 
 	c, err := NewClient()
 	if err != nil {
-		return err
+		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
+		c = &client{Client: github.NewClient(nil)}
 	}
 
 	d := newDowner(c, 1)
@@ -1574,7 +1577,8 @@ func get(args []string) error {
 
 	c, err := NewClient()
 	if err != nil {
-		return err
+		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
+		c = &client{Client: github.NewClient(nil)}
 	}
 
 	d := newDowner(c, *wkr)
@@ -1626,7 +1630,8 @@ func install(args []string) error {
 
 	c, err := NewClient()
 	if err != nil {
-		return err
+		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
+		c = &client{Client: github.NewClient(nil)}
 	}
 
 	// setup a temp directory for install operations
@@ -1886,7 +1891,8 @@ func resolve(args []string) error {
 
 	c, err := NewClient()
 	if err != nil {
-		return err
+		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
+		c = &client{Client: github.NewClient(nil)}
 	}
 
 	for _, arg := range args {
@@ -1914,7 +1920,8 @@ func resolve(args []string) error {
 func say(args []string) error {
 	c, err := NewClient()
 	if err != nil {
-		return err
+		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
+		c = &client{Client: github.NewClient(nil)}
 	}
 	octolog(c, strings.Join(args, " "))
 	return nil
@@ -1951,7 +1958,8 @@ func tags(args []string) error {
 
 	c, err := NewClient()
 	if err != nil {
-		return err
+		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
+		c = &client{Client: github.NewClient(nil)}
 	}
 
 	w := tabwriter.NewWriter(os.Stdout, 12, 8, 2, ' ', 0)
