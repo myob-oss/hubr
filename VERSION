@@ -1,3 +1,9 @@
+v0.6.7
+
+- allow unauth'd usage
+- move to oss org
+
+
 v0.6.6
 
 - fix .git not found bug
