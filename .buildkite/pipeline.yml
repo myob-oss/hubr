@@ -1,0 +1,6 @@
+agents:
+  queue: oss-lab
+
+steps:
+  - label: "Running Tests"
+  - command: "echo 'Running Tests'"
