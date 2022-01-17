@@ -4,5 +4,3 @@ agents:
 steps:
   - label: "Running Tests"
   - command: "echo 'Running Tests'"
-    agents:
-      queue: oss-lab
