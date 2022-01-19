@@ -3,4 +3,4 @@ agents:
 
 steps:
   - label: "Running Tests"
-    command: echo 'Running Tests..'
+    command: make install-deps test
