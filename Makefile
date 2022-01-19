@@ -43,6 +43,7 @@ update:
 install-deps:
 	go mod download
 	go install
+	ls -lart /go/bin
 
 test:
 	go clean -testcache
