@@ -42,6 +42,7 @@ update:
 
 install-deps:
 	go mod download
+	go install
 
 test:
 	go clean -testcache
@@ -52,7 +53,6 @@ vet:
 	go vet ./... > ${VET_REPORT} 2>&1 ; \
 
 lint:
-	go get -u golang.org/x/lint/golint
 	golint -set_exit_status
 
 fmt:
