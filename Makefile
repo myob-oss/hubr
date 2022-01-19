@@ -52,8 +52,7 @@ vet:
 	go vet ./... > ${VET_REPORT} 2>&1 ; \
 
 lint:
-	echo $PATH
-	golint -set_exit_status
+	echo $PATH && pwd && golint -set_exit_status
 
 fmt:
 	cd ${BUILD_DIR}; \
