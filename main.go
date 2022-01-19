@@ -1,4 +1,4 @@
-package main // import "github.com/MYOB-Technology/hubr"
+package main // import "github.com/MYOB-OSS/hubr"
 
 import (
 	"archive/zip"

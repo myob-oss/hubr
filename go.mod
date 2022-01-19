@@ -1,4 +1,4 @@
-module github.com/MYOB-Technology/hubr
+module github.com/MYOB-OSS/hubr
 
 go 1.14
 
