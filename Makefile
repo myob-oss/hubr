@@ -14,10 +14,10 @@ CURRENT_DIR=$(shell pwd)
 BUILD_DIR_LINK=$(shell readlink ${BUILD_DIR})
 
 # Setup the -ldflags option for go build here, interpolate the variable values
-LDFLAGS = -ldflags "-X main.VERSION=${VERSION} -X main.COMMIT=${COMMIT} -X main.BRANCH=${BRANCH}"
+LDFLAGS = -ldflags "-X main.hubr=${VERSION} -X main.COMMIT=${COMMIT} -X main.BRANCH=${BRANCH}"
 
 # Build the project
-all: clean test vet linux darwin windows
+all: clean install-deps test vet linux darwin windows
 
 linux:
 	cd ${BUILD_DIR}; \
@@ -41,7 +41,7 @@ install-deps:
 	go mod download
 
 test:
-	# go clean -testcache
+	go clean -testcache
 	go test ./... -v
 
 vet:
