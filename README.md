@@ -27,7 +27,6 @@ Over [here](https://github.com/myob-oss/hubr/releases/latest)!
 ## Running Tests
 - run `make install-deps test` to run tests
 
-
 ## authentication
 
 A GitHub personal access token is required, and may be read from the environ
