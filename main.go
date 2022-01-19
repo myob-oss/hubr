@@ -60,6 +60,9 @@ var (
 	// hubr version, set at build time
 	// -ldflags="-X main.hubr=$(head -n 1 VERSION)"
 	hubr = "unknown"
+
+	COMMIT = "none"
+	BRANCH = "unknown"
 )
 
 func init() {
