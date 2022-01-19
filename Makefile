@@ -52,7 +52,8 @@ vet:
 	go vet ./... > ${VET_REPORT} 2>&1 ; \
 
 lint:
-	@echo $(PATH) && pwd && golint -set_exit_status
+	go get -u golang.org/x/lint/golint
+	golint -set_exit_status
 
 fmt:
 	cd ${BUILD_DIR}; \
