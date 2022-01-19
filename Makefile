@@ -41,7 +41,7 @@ install-deps:
 	go mod download
 
 test:
-	go clean -testcache
+	# go clean -testcache
 	go test ./... -v
 
 vet:
