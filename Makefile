@@ -34,6 +34,9 @@ windows:
 	GOOS=windows GOARCH=${GOARCH} go build ${LDFLAGS} -o bin/${BINARY}-windows-${GOARCH}.exe . ; \
 	cd - >/dev/null
 
+zip-code:
+	# TODO zip the code
+
 update:
 	go get -u ./...
 
@@ -45,10 +48,11 @@ test:
 	go test ./... -v
 
 vet:
-	# To fix later
-	# -cd ${BUILD_DIR}; \
-	# go vet ./... > ${VET_REPORT} 2>&1 ; \
-	# cd - >/dev/null
+	go list ./...
+	go vet ./... > ${VET_REPORT} 2>&1 ; \
+
+lint:
+	# lint code
 
 fmt:
 	cd ${BUILD_DIR}; \
@@ -60,4 +64,4 @@ clean:
 	-rm -f ${VET_REPORT}
 	-rm -rf bin
 
-.PHONY: all linux darwin windows update install-deps test vet fmt clean 
+.PHONY: all linux darwin windows update install-deps test vet lint fmt clean zip-code
