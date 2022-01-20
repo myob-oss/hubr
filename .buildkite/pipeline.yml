@@ -1,0 +1,10 @@
+agents:
+  queue: oss-lab
+
+steps:
+  - label: ":rocket: Testing.."
+    command: make install-deps test
+    plugins:
+      - docker#v3.9.0:
+          image: "golang:1.14"
+          workdir: /go/src/app

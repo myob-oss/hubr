@@ -1,3 +1,6 @@
+v0.6.8
+- general fixes to build CI and scripts (no functionality changes)
+
 v0.6.7
 
 - allow unauth'd usage

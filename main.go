@@ -1,4 +1,4 @@
-package main // import "github.com/MYOB-Technology/hubr"
+package main // import "github.com/MYOB-OSS/hubr"
 
 import (
 	"archive/zip"
@@ -60,6 +60,11 @@ var (
 	// hubr version, set at build time
 	// -ldflags="-X main.hubr=$(head -n 1 VERSION)"
 	hubr = "unknown"
+
+	// COMMIT the commit sha
+	COMMIT = "none"
+	// BRANCH the branch name
+	BRANCH = "unknown"
 )
 
 func init() {
@@ -87,7 +92,7 @@ type client struct {
 // - key "ssm" calls ssmGet(v)
 // The first result which is not missing is used for GitHub authentication.
 // If no result is found hubr will attempt to invoke a git credential helper.
-func NewClient() (*client, error) {
+func newClient() (*client, error) {
 	var err error
 	var token string
 	for _, p := range strings.Split(defaultChain, ",") {
@@ -653,7 +658,7 @@ type spec struct {
 // exist. A release is created if one does not exist. Files listed in uploads
 // are uploaded.
 func (s spec) release() error {
-	c, err := NewClient()
+	c, err := newClient()
 	if err != nil {
 		return err
 	}
@@ -1320,7 +1325,7 @@ func assets(args []string) error {
 		os.Exit(2)
 	}
 
-	c, err := NewClient()
+	c, err := newClient()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
 		c = &client{Client: github.NewClient(nil)}
@@ -1439,7 +1444,7 @@ func bump(args []string) error {
 			f.Usage()
 			os.Exit(2)
 		}
-		c, err := NewClient()
+		c, err := newClient()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
 			c = &client{Client: github.NewClient(nil)}
@@ -1525,7 +1530,7 @@ func cat(args []string) error {
 		os.Exit(2)
 	}
 
-	c, err := NewClient()
+	c, err := newClient()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
 		c = &client{Client: github.NewClient(nil)}
@@ -1575,7 +1580,7 @@ func get(args []string) error {
 		os.Exit(2)
 	}
 
-	c, err := NewClient()
+	c, err := newClient()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
 		c = &client{Client: github.NewClient(nil)}
@@ -1628,7 +1633,7 @@ func install(args []string) error {
 		os.Exit(2)
 	}
 
-	c, err := NewClient()
+	c, err := newClient()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
 		c = &client{Client: github.NewClient(nil)}
@@ -1889,7 +1894,7 @@ func resolve(args []string) error {
 		os.Exit(2)
 	}
 
-	c, err := NewClient()
+	c, err := newClient()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
 		c = &client{Client: github.NewClient(nil)}
@@ -1918,7 +1923,7 @@ func resolve(args []string) error {
 
 // Subcmd say is a mystery, who knows what it truly does...
 func say(args []string) error {
-	c, err := NewClient()
+	c, err := newClient()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
 		c = &client{Client: github.NewClient(nil)}
@@ -1956,7 +1961,7 @@ func tags(args []string) error {
 		*list, *all = true, true
 	}
 
-	c, err := NewClient()
+	c, err := newClient()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "WARNING: proceeding without token: %s\n", err)
 		c = &client{Client: github.NewClient(nil)}
@@ -2079,7 +2084,7 @@ func what(args []string) error {
 
 // Subcmd who prints the owner of the GitHub personal access token used by hubr.
 func who(args []string) error {
-	c, err := NewClient()
+	c, err := newClient()
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,6 @@
 # hubr
 
-[![build status](https://badge.buildkite.com/2b4f124a3e79969bf2d7e4dd78ca21eec29ecfcec3e3b39da4.svg?branch=master&theme=00aa65,ce2554,2b74df,8241aa,fff,fff)](https://buildkite.com/myob/hubr)
+[![build status](https://badge.buildkite.com/2b4f124a3e79969bf2d7e4dd78ca21eec29ecfcec3e3b39da4.svg?branch=master&theme=00aa65,ce2554,2b74df,8241aa,fff,fff)](https://buildkite.com/myob/hubr) - `myob-oss-lab` 
 
 ## about
 
@@ -17,6 +17,14 @@ for semantic versioning and changelog generation.
 
 Over [here](https://github.com/myob-oss/hubr/releases/latest)!
 
+## Development
+
+- Clone this repository
+- Ensure Golang 1.x is installed (latest preferred)
+- run `make install-deps` to download the current dependency versions
+
+## Running Tests
+- run `make install-deps test` to run tests
 
 ## authentication
 
