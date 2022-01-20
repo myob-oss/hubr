@@ -53,9 +53,6 @@ vet:
 	go list ./...
 	go vet ./... > ${VET_REPORT} 2>&1 ; \
 
-lint:
-	golint -set_exit_status
-
 fmt:
 	cd ${BUILD_DIR}; \
 	go fmt $$(go list ./... | grep -v /vendor/) ; \
@@ -66,4 +63,4 @@ clean:
 	-rm -f ${VET_REPORT}
 	-rm -rf bin
 
-.PHONY: all linux darwin windows update install-deps test vet lint fmt clean zip-code
+.PHONY: all linux darwin windows update install-deps test vet fmt clean zip-code
