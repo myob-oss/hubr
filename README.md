@@ -23,7 +23,6 @@ Over [here](https://github.com/myob-oss/hubr/releases/latest)!
 - Ensure Golang 1.x is installed (latest preferred)
 - run `make install-deps` to download the current dependency versions
 
-
 ## Running Tests
 - run `make install-deps test` to run tests
 
