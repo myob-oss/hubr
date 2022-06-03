@@ -192,6 +192,7 @@ func (c *client) GetDraft(id ident) (*github.RepositoryRelease, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	for _, r := range rs {
 		if id.tag == r.GetTagName() {
 			return r, nil
@@ -233,18 +234,33 @@ func (c *client) GetRelease(id ident) (*github.RepositoryRelease, error) {
 // does not exist an error is returned. If the release exists and is not a
 // draft nothing happens and no error is returned.
 func (c *client) PublishRelease(id ident) error {
-	r, err := c.GetDraft(id)
-	if err != nil {
-		return fmt.Errorf("get release: %s", err)
+	var r *github.RepositoryRelease
+	var err error
+	//We have to retry this block of code because when we hit the publish release API in github,
+	//and the get draft API, the release that was published doesn't show up on the draft get because of potential
+	//read after write consistency issues on the github side of things. For now, retrying 3 times should do the trick
+	//if it's an errorNotFound from the GetDraft method.
+	for tries := 0; tries < 3; tries++ {
+		r, err = c.GetDraft(id)
+		switch err.(type) {
+		case nil:
+			if !r.GetDraft() {
+				return nil
+			}
+			*r.Draft = false
+			r, _, err = c.Repositories.EditRelease(ctxbg, id.org, id.repo, r.GetID(), r)
+			return err
+
+		case errNotFound:
+			time.Sleep(time.Second * time.Duration(2*(tries+1)))
+			break
+
+		default:
+			return fmt.Errorf("get release: %s", err)
+		}
 	}
 
-	if !r.GetDraft() {
-		return nil
-	}
-
-	*r.Draft = false
-	r, _, err = c.Repositories.EditRelease(ctxbg, id.org, id.repo, r.GetID(), r)
-	return err
+	return fmt.Errorf("get release: %s", err)
 }
 
 // CreateTag creates a tag on GitHub. If msg is blank a lightweight tag will be
