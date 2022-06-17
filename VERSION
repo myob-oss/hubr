@@ -1,3 +1,8 @@
+v0.6.9
+
+- added retry for release step
+
+
 v0.6.8
 - general fixes to build CI and scripts (no functionality changes)
 
