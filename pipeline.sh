@@ -16,7 +16,7 @@ steps:
       queue: $QUEUE
     env:
       CONTAINER: $CONTAINER
-    - wait
+  - wait
   - trigger: 'hubr-myob'
     label: ':satellite_antenna: build private version'
     async: true
