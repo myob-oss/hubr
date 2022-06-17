@@ -14,7 +14,9 @@ steps:
       - ops/bin/40-release.sh
     agents:
       queue: $QUEUE
-  - wait
+    env:
+      CONTAINER: $CONTAINER
+    - wait
   - trigger: 'hubr-myob'
     label: ':satellite_antenna: build private version'
     async: true
