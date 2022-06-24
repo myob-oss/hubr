@@ -1,7 +1,7 @@
 #!/bin/bash
 
 die() { echo "release failed: $*"; exit 1; }
-org=MYOB-Technology
+org=myob-oss
 
 echo "~~~ release"
 
