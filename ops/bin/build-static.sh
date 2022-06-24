@@ -11,7 +11,7 @@ mkdir -p dist || die "dist"
 
 LDFLAGS=(
   "-X main.hubr=$(head -n1 VERSION)-static"
-  "-X main.defaultChain=env:GITHUB_API_TOKEN,env:TOKEN,ssm:/etc/token/gh"⏎
+  "-X main.defaultChain=env:GITHUB_API_TOKEN,env:TOKEN,ssm:/etc/tokens/oss-gh"
 )
 
 for os in linux darwin windows; do
