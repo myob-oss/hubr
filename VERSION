@@ -1,3 +1,8 @@
+v0.6.11
+
+- Fix broken release
+
+
 v0.6.10
 
 - add SSM param to auth chain at buildtime for OSS org
