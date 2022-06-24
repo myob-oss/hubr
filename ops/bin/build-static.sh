@@ -9,11 +9,16 @@ shopt -s extglob
 rm -rf dist
 mkdir -p dist || die "dist"
 
+LDFLAGS=(
+  "-X main.hubr=$(head -n1 VERSION)-static"
+  "-X main.defaultChain='env:GITHUB_API_TOKEN,env:TOKEN,ssm:/etc/token/gh'"⏎
+)
+
 for os in linux darwin windows; do
     echo "~~~ :go: :clipboard: build $os"
     rm -f hubr hubr.exe
     CGO_ENABLED=0 GOOS="$os" go build \
-      -ldflags="-X main.hubr=$(head -n1 VERSION)-static" || die "build"
+      -ldflags="${LDFLAGS[*]}" || die "build"
     zip -j "dist/hubr-$os.zip" hubr?(.exe) || die "zip"
 done
 
