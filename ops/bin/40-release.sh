@@ -11,9 +11,9 @@ cd "$(dirname "$(git rev-parse --absolute-git-dir)")" || die "cd to repo root"
 
 # mwahahahaha this is pure evil
 unzip dist/hubr-linux.zip || die "unzip hubr"
-./hubr push $org/hubr dist/* || die "push"
+hubr push $org/hubr dist/* || die "push"
 
-if ./hubr now; then
+if hubr now; then
         myob-release prod dont-panic
         buildkite-agent annotate --style "info" <<🐈
 <a href="$(./hubr resolve -w $org/hubr)">$(./hubr resolve $org/hubr)</a>
