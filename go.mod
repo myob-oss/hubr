@@ -8,5 +8,6 @@ require (
 	github.com/google/go-querystring v1.0.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20190604053449-0f29369cfe45
 	golang.org/x/text v0.3.8 // indirect
+	golang.org/x/net v0.7.0 // indirect
 	gopkg.in/src-d/go-git.v4 v4.13.1
 )
