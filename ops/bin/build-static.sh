@@ -14,11 +14,14 @@ LDFLAGS=(
   "-X main.defaultChain=env:GITHUB_API_TOKEN,env:TOKEN,ssm:/etc/tokens/oss-gh"
 )
 
+apt update
+apt -y install zip
+
 for os in linux darwin windows; do
     echo "~~~ :go: :clipboard: build $os"
     rm -f hubr hubr.exe
     CGO_ENABLED=0 GOOS="$os" go build \
-      -ldflags="${LDFLAGS[*]}" || die "build"
+     -buildvcs=false -ldflags="${LDFLAGS[*]}" || die "build"
     zip -j "dist/hubr-$os.zip" hubr?(.exe) || die "zip"
 done
 
