@@ -1,0 +1,24 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: hubr-oss
+  description: The OSS code for hubr
+  tags:
+    - github
+    - golang
+  labels:
+    primarySlackChannel: C5UTN25MW # t-devex channel
+  annotations:
+    github.com/project-slug: myob-oss/hubr
+    buildkite.com/project-slug: myob/hubr
+    github.com/team-slug: myob-oss/pathway-engineering
+    myob.com/email: do-not-panic@myob@myob.com
+    sonarqube.org/project-key: sonar-reliability-and-security:hubr
+  impact:
+    criticality: low
+spec:
+  owner: reliability-domain/pathway-engineering-team-team
+  type: service
+  lifecycle: active-decommissioning
+  system: hubr
